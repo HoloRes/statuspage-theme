@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .alert-text {
 	padding-left: 10px;
 }
@@ -111,17 +115,17 @@ body .layout-content.status.status-incident > .container {
 @font-face {
 	font-family: Whiteney;
 	font-weight: 400;
-	src: url("https://holores.s3.nl-ams.scw.cloud/Whitney-Book.otf") format("opentype");
+	src: url("./Whitney-Book.otf") format("opentype");
 }
 @font-face {
 	font-family: Whiteney;
 	font-weight: 300;
-	src: url("https://holores.s3.nl-ams.scw.cloud/Whitney-Light.otf") format("opentype");
+	src: url("./Whitney-Light.otf") format("opentype");
 }
 @font-face {
 	font-family: Whiteney;
 	font-weight: 600;
-	src: url("https://holores.s3.nl-ams.scw.cloud/Whitney-Medium.otf") format("opentype");
+	src: url("./Whitney-Medium.otf") format("opentype");
 }
 body {
 	margin: 0;
