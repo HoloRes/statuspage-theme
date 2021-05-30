@@ -5,7 +5,8 @@
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="./dist/tailwind.css" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/luxon@1.23.0/build/global/luxon.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 	<script>
 		const BASE_URL = "https://2qb6q533c25x.statuspage.io/api/v2";
@@ -496,42 +497,7 @@
 	<div class="loader-wrapper">
 		<div class="loader"></div>
 	</div>
-	<header class="w-fill">
-		<!--<div class="container-fluid">
-			<div class="row justify-content-md-between px-3 align-items-center py-4 justify-content-center">
-				<div class="header-logo">
-					<a href="/">
-						<img src="https://holores.s3.nl-ams.scw.cloud/banner_black.png">
-					</a>
-				</div>
-				<ul class="list-inline menu-list flex-one text-center">
-					<li class="list-inline-item">
-						<a href="/history">Past Incidents</a>
-					</li>
-					<li class="list-inline-item">
-						<a target="_blank" href="https://holores.atlassian.net/">Issue Tracker</a>
-					</li>
-				</ul>
-
-				<div class="header-button-wrapper updates-dropdown-container" style="display: inline-block;">
-					<a target="_blank" href="https://holores.atlassian.net/servicedesk/customer/portal/2"><button
-							class="btn btn-grey mr-3">Contact support</button></a>
-					<div id="replace-with-subscribe"></div>
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid ">
-			<div class="row ">
-				<div class="col-12  py-3 bg-gray">
-					<div class="incidents-count d-flex flex-wrap text-uppercase flex-one text-center">
-						<div class="flex-one text-center" id="page_status_bar">
-						</div>
-						<a target="_blank" href="https://holores.atlassian.net/servicedesk/customer/portal/2"
-							class="report-incident ml-auto color-red cursor">Report an Incident</a>
-					</div>
-				</div>
-			</div>
-		</div>-->
+	<header class="w-full">
 		<div class="flex justify-between items-center h-24 mx-4">
 			<div>
 				<a href="/">
@@ -544,151 +510,159 @@
 			</div>
 			<div class="flex">
 				<a target="_blank" href="https://holores.atlassian.net/servicedesk/customer/portal/2"><button
-					class="bg-gray-600 rounded-md text-white px-2 py-2 mr-2">Contact support</button></a>
+						class="bg-gray-600 rounded-md text-white px-2 py-2 mr-2">Contact support</button></a>
 				<div id="replace-with-subscribe" class="ml-2"></div>
 			</div>
 		</div>
-		<div class="flex justify-between items-center h-12 bg-gray-200 mx-4">
-			<div>
-			</div>
-			<div class="text-center" id="page_status_bar">
+		<div class="h-12 bg-gray-200">
+			<div class="flex items-center justify-between mx-4 h-full">
+				<div>
+				</div>
+				<div class="text-center" id="page_status_bar">
+				</div>
+				<a target="_blank" href="https://holores.atlassian.net/servicedesk/customer/portal/2"
+					class="text-red-500 cursor-pointer text-center">Report an Incident</a>
 			</div>
 		</div>
 	</header>
-	<div class="container pt-3" id="theStatus">
-		<div class="row py-4">
-			<div class="col-12 col-md-12">
-				<div class="status-txt-line">HoloRes' Status Page</div>
-				<div class="big-txt-info" id="status_based_txt"></div>
-				<div class="other-info-txt">Check here for updates about HoloRes' services availability.<br> Subscribe
-					to
-					get real-time updates via email, RSS,
-					Slack, and more.
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container main-page">
-		<div class="row" id="red_incident_container">
-
-
-		</div>
-		<div class="row" id="orange_incident_container">
-
-
-		</div>
-		<div class="row" id="green_alerted_container">
-
-
-		</div>
-		<div class="row" id="maintenance_incident">
-
-
-		</div>
-	</div>
-	<div class="container pb-5 main-page position-relative z-index-own">
-		<div class="row">
-			<div class="divider-own col-12" id="component_top_hr"></div>
-			<div class="col-md-6 col-12">
-				<div class="box-wrapper" id="i_component_header">
-					<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
-						id="i_component_status_bar">
-					</div>
-					<div class="bg-gray d-flex flex-wrap align-items-center p-4">
-						<div class="box-icon-wrapper" id="i_component_logo">
-							<img src="https://holores.s3.nl-ams.scw.cloud/logo_black.png" class="pr-3" width="45">
-						</div>
-						<div class="flex-one ">
-							<div class="inner-list-large-txt pb-1">
-								HoloRes
-							</div>
-							<div class="grey-box-sub-txt">
-								Issues related to services used by HoloRes itself
-							</div>
-						</div>
-
-					</div>
-					<ul class="list-unstyled outer-box-dot-wrapper pl-4 pt-3 pr-3 pb-3" id="internal_components">
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-6 col-12">
-				<div class="box-wrapper" id="tl_component_header">
-					<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
-						id="tl_component_status_bar">
-					</div>
-					<div class="bg-gray d-flex flex-wrap align-items-center p-4">
-						<div class="box-icon-wrapper" id="tl_component_logo">
-							<img src="https://holores.s3.nl-ams.scw.cloud/translator.png" class="pr-3" width="45">
-						</div>
-						<div class="flex-one ">
-							<div class="inner-list-large-txt pb-1">
-								TL Team
-							</div>
-							<div class="grey-box-sub-txt">
-								Issues with services used by the TL Team.
-							</div>
-						</div>
-					</div>
-					<ul class="list-unstyled outer-box-dot-wrapper pl-4 pt-3 pr-3 pb-3" id="tl_components">
-
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Disabled as there are currently no public services -->
-		<!--<br/>
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <div class="box-wrapper" id="p_component_header">
-                <div class="round-small-heading color-white-own py-2 text-uppercase text-center"
-                     id="p_component_status_bar">
-                </div>
-                <div class="bg-gray d-flex flex-wrap align-items-center p-4">
-                    <div class="box-icon-wrapper" id="p_component_logo">
-                        <img src="https://holores.s3.nl-ams.scw.cloud/external-blue.png" class="pr-3" width="45">
-                    </div>
-                    <div class="flex-one ">
-                        <div class="inner-list-large-txt pb-1">
-                            Public
-                        </div>
-                        <div class="grey-box-sub-txt">
-                            Issues with public services hosted by HoloRes.
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-unstyled outer-box-dot-wrapper pl-4 pt-3 pr-3 pb-3" id="public_components">
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>-->
-		<div class="bg-gray py-5 mt-5 main-page cross-bg" id="all_scheduled">
-			<div class="container">
-
-				<div class="row position-relative">
-					<div class="right-turn-text">MAINTENANCE UPDATE NOTIFICATIONS</div>
-					<div class="col-lg-9 col-md-10 col-12" id="scheduled_maintenances_div">
-						<div class="status-txt-line">UPCOMING MAINTENANCE</div>
-						<div class="big-txt-info-second">
-							<div>Keep up to date with planned maintenance for our services.</div>
-						</div>
-						<div class="other-info-txt pb-4">
-							Subscribe for updates so you’ll know ahead of time about potential service disruptions.
-						</div>
-
+	<div class="mx-96">
+		<div class="pt-3" id="theStatus">
+			<div class="flex py-4">
+				<div>
+					<div class="status-txt-line">HoloRes' Status Page</div>
+					<div class="big-txt-info" id="status_based_txt"></div>
+					<div class="other-info-txt">Check here for updates about HoloRes' services availability.<br>
+						Subscribe
+						to
+						get real-time updates via email, RSS,
+						Slack, and more.
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container pt-5 main-page">
-			<div class="row py-4">
-				<div class="col-12">
-					<div class="status-txt-line text-center">SYSTEM METRICS</div>
-					<div class="big-txt-info-second text-center">
-						<div>
-							Stay up to date with our uptime and response times.
+		<div class="w-full main-page">
+			<div class="flex" id="red_incident_container">
+
+
+			</div>
+			<div class="flex" id="orange_incident_container">
+
+
+			</div>
+			<div class="flex" id="green_alerted_container">
+
+
+			</div>
+			<div class="flex" id="maintenance_incident">
+
+
+			</div>
+		</div>
+		<div class="container pb-5 main-page position-relative z-index-own">
+			<div class="flex">
+				<div class="divider-own flex" id="component_top_hr"></div>
+				<div class="flex justify-center -ml-4">
+					<div class="box-wrapper min-w-[32rem]" id="i_component_header">
+						<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
+							id="i_component_status_bar">
+						</div>
+						<div class="bg-gray-100 flex flex-wrap items-center p-4">
+							<div class="box-icon-wrapper" id="i_component_logo">
+								<img src="https://holores.s3.nl-ams.scw.cloud/logo_black.png" class="pr-3" width="45">
+							</div>
+							<div class="flex flex-col">
+								<div class="text-3xl pb-1">
+									HoloRes
+								</div>
+								<div class="text-gray-600 text-sm">
+									Issues related to services used by HoloRes itself
+								</div>
+							</div>
+
+						</div>
+						<ul class="outer-box-dot-wrapper pl-4 pt-3 pr-3 pb-3" id="internal_components">
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6 col-12">
+					<div class="box-wrapper" id="tl_component_header">
+						<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
+							id="tl_component_status_bar">
+						</div>
+						<div class="bg-gray d-flex flex-wrap align-items-center p-4">
+							<div class="box-icon-wrapper" id="tl_component_logo">
+								<img src="https://holores.s3.nl-ams.scw.cloud/translator.png" class="pr-3" width="45">
+							</div>
+							<div class="flex-one ">
+								<div class="inner-list-large-txt pb-1">
+									TL Team
+								</div>
+								<div class="grey-box-sub-txt">
+									Issues with services used by the TL Team.
+								</div>
+							</div>
+						</div>
+						<ul class="list-unstyled outer-box-dot-wrapper pl-4 pt-3 pr-3 pb-3" id="tl_components">
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Disabled as there are currently no public services -->
+			<!--
+			<br/>
+			<div class="row">
+				<div class="col-md-6 col-12">
+					<div class="box-wrapper" id="p_component_header">
+						<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
+							id="p_component_status_bar">
+						</div>
+						<div class="bg-gray d-flex flex-wrap align-items-center p-4">
+							<div class="box-icon-wrapper" id="p_component_logo">
+								<img src="https://holores.s3.nl-ams.scw.cloud/external-blue.png" class="pr-3" width="45">
+							</div>
+							<div class="flex-one ">
+								<div class="inner-list-large-txt pb-1">
+									Public
+								</div>
+								<div class="grey-box-sub-txt">
+									Issues with public services hosted by HoloRes.
+								</div>
+							</div>
+						</div>
+						<ul class="list-unstyled outer-box-dot-wrapper pl-4 pt-3 pr-3 pb-3" id="public_components">
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			-->
+			<div class="bg-gray py-5 mt-5 main-page cross-bg" id="all_scheduled">
+				<div class="container">
+
+					<div class="row position-relative">
+						<div class="right-turn-text">MAINTENANCE UPDATE NOTIFICATIONS</div>
+						<div class="col-lg-9 col-md-10 col-12" id="scheduled_maintenances_div">
+							<div class="status-txt-line">UPCOMING MAINTENANCE</div>
+							<div class="big-txt-info-second">
+								<div>Keep up to date with planned maintenance for our services.</div>
+							</div>
+							<div class="other-info-txt pb-4">
+								Subscribe for updates so you’ll know ahead of time about potential service disruptions.
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-5 main-page">
+				<div class="row py-4">
+					<div class="col-12">
+						<div class="status-txt-line text-center">SYSTEM METRICS</div>
+						<div class="big-txt-info-second text-center">
+							<div>
+								Stay up to date with our uptime and response times.
+							</div>
 						</div>
 					</div>
 				</div>
