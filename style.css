@@ -718,6 +718,7 @@ img {
 		background-color: #f5f5f5;
 		content: "";
 		transform: rotate(10deg);
+		z-index: -1;
 		top: -8vw;
 		pointer-events: none;
 	}

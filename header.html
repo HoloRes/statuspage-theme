@@ -9,7 +9,7 @@
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 	<script>
-		const BASE_URL = "https://2qb6q533c25x.statuspage.io/api/v2";
+		const BASE_URL = "https://status.twilio.com/api/v2";
 		const URL_SUFFIX = "";
 
 		function get_time_tz(givenTime, timeZone) {
@@ -121,7 +121,7 @@
 				];
 
 
-				//for page status
+				// Page status
 				if (summaryData.status.indicator === "critical") {
 					dot_class = "red-dot";
 				} else if (summaryData.status.indicator === "major" || summaryData.status.indicator === "minor") {
@@ -169,59 +169,41 @@
 
 				if (down_internal === 0 && down_services === 0) {
 					i_components_bg_class = "green";
+
 					$("#i_component_status_bar").html('All Systems Operational');
 				} else if (down_internal === 0 && down_services > 0) {
 					i_components_bg_class = "green";
-					if (down_services === 1) {
-						reporting_text = down_services + ' SERVICE';
-					} else {
-						reporting_text = down_services + ' SERVICES';
-					}
+					reporting_text = down_services + ' SERVICE' + (down_services === 1 ? '' : 'S');
+
 					$("#i_component_status_bar").html(reporting_text + ' MAY BE IMPACTED');
 				} else if (down_internal > 0 && down_services > 0) {
-					if (down_internal === 1 && down_services === 1) {
-						reporting_text = down_internal + ' INCIDENT, ' + down_services + ' SERVICE';
-					} else if (down_internal === 1 && down_services > 1) {
-						reporting_text = down_internal + ' INCIDENT, ' + down_services + ' SERVICES';
-					} else if (down_internal > 1 && down_services === 1) {
-						reporting_text = down_internal + ' INCIDENTS, ' + down_services + ' SERVICE';
-					} else {
-						reporting_text = down_internal + ' INCIDENTS, ' + down_services + ' SERVICES';
-					}
+					reporting_text = `${down_internal} INCIDENT${down_internal === 1 ? '' : 'S'}, ${down_services} SERVICE${down_services === 1 ? '' : 'S'}`
+
 					$("#i_component_status_bar").html(reporting_text + ' MAY BE IMPACTED');
 				} else {
-					if (down_internal === 1) {
-						reporting_text = down_internal + ' INCIDENT';
-					} else {
-						reporting_text = down_internal + ' INCIDENTS';
-					}
+					reporting_text = `${down_internal} INCIDENT${down_internal === 1 ? '' : 'S'}`;
 					$("#i_component_status_bar").html(reporting_text + ' REPORTED');
 				}
 
 				if (down_public === 0) {
 					p_components_bg_class = "green";
+
 					$("#p_component_status_bar").html('All Systems Operational');
 				} else {
-					if (down_public === 1) {
-						reporting_text = down_public + ' INCIDENT';
-						$("#p_component_status_bar").html(reporting_text + ' REPORTED');
-					} else {
-						reporting_text = down_public + ' INCIDENTS';
-						$("#p_component_status_bar").html(reporting_text + ' REPORTED');
-					}
+					reporting_text = `${down_public} INCIDENT${down_public === 1 ? '' : 'S'}`;
+
+					$("#p_component_status_bar").html(reporting_text + ' REPORTED');
 				}
 				if (down_tl === 0) {
 					tl_components_bg_class = "green";
+
 					$("#tl_component_status_bar").html('All Systems Operational');
 				} else {
-					if (down_tl === 1) {
-						reporting_text = down_tl + ' INCIDENT';
-						$("#tl_component_status_bar").html(reporting_text + ' REPORTED');
-					} else {
-						reporting_text = down_tl + ' INCIDENTS';
-						$("#tl_component_status_bar").html(reporting_text + ' REPORTED');
-					}
+					reporting_text = `${down_tl} INCIDENT${down_tl === 1 ? '' : 'S'}`;
+					
+					$("#tl_component_status_bar").html(reporting_text + ' REPORTED');
 				}
+
 				$("#i_component_status_bar").addClass('bg-' + i_components_bg_class);
 				$("#p_component_status_bar").addClass('bg-' + p_components_bg_class);
 				$("#tl_component_status_bar").addClass('bg-' + tl_components_bg_class);
@@ -229,14 +211,12 @@
 				if (total_incidents === 0) {
 					$("#page_status_bar").html('<span class="' + dot_class + '"></span>All Systems Operational');
 					$("#status_based_txt").html('Current Information on Service Availability.');
-				} else if (total_incidents === 1) {
-					$("#page_status_bar").html('<span class="' + dot_class + '"></span>' + total_incidents + ' INCIDENT REPORTED');
-					$("#status_based_txt").html('Current Information on Service Availability.');
 				} else {
-					$("#page_status_bar").html('<span class="' + dot_class + '"></span>' + total_incidents + ' INCIDENTS REPORTED');
+					$("#page_status_bar").html(`<span class="${dot_class}"></span>${total_incidents} INCIDENT${total_incidents === 1 ? '' : 'S'} REPORTED`);
 					$("#status_based_txt").html('Current Information on Service Availability.');
 				}
-
+				
+				// Header.html is used as path for development
 				if (window.location.pathname !== "/" && window.location.pathname !== "/header.html") {
 					url_path = window.location.pathname;
 					if (url_path.substring(1, 10) === 'incidents') {
@@ -247,7 +227,7 @@
 								let affected_component;
 								let affected_class;
 								if (i_value.id === incident_id) {
-									$(".components-affected").html('<div class="components-affected-wrapper"><span \ class="color-light-grey font-14">This incident affected: </span></div>');
+									$(".components-affected").html('<div class="components-affected-wrapper"><span \ class="color-light-grey text-xl">This incident affected: </span></div>');
 									if (i_value.impact === "none" && i_value.status === "investigating") {
 										i_value.components.forEach((component) => {
 											$(".components-affected-wrapper").append('<span>' + component.name + '</span>');
@@ -267,7 +247,7 @@
 														affected_class = "green-dot-own";
 													}
 													comp_name = ac_value.name.substring(ac_value.name.indexOf("-") + 1);
-													$(".components-affected-wrapper").append('<span class="' + affected_class + ' dot-before font-15 color-blue">' + comp_name + '</span>');
+													$(".components-affected-wrapper").append('<span class="' + affected_class + ' dot-before font-lg color-blue">' + comp_name + '</span>');
 													componentsArray.push(ac_value.name);
 													affected_component = ac_value.name;
 												}
@@ -541,19 +521,19 @@
 			</div>
 		</div>
 		<div class="w-full main-page">
-			<div class="flex" id="red_incident_container">
+			<div class="flex flex-col" id="red_incident_container">
 
 
 			</div>
-			<div class="flex" id="orange_incident_container">
+			<div class="flex flex-col" id="orange_incident_container">
 
 
 			</div>
-			<div class="flex" id="green_alerted_container">
+			<div class="flex flex-col" id="green_alerted_container">
 
 
 			</div>
-			<div class="flex" id="maintenance_incident">
+			<div class="flex flex-col" id="maintenance_incident">
 
 
 			</div>
@@ -563,8 +543,7 @@
 				<div class="divider-own flex" id="component_top_hr"></div>
 				<div class="flex justify-center -ml-4">
 					<div class="box-wrapper min-w-[32rem]" id="i_component_header">
-						<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
-							id="i_component_status_bar">
+						<div class="rounded-t-md text-white py-2 uppercase text-center" id="i_component_status_bar">
 						</div>
 						<div class="bg-gray-100 flex flex-wrap items-center p-4">
 							<div class="box-icon-wrapper" id="i_component_logo">
@@ -584,20 +563,19 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-6 col-12">
-					<div class="box-wrapper" id="tl_component_header">
-						<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
-							id="tl_component_status_bar">
+				<div class="flex justify-center ml-4">
+					<div class="box-wrapper min-w-[32rem]" id="tl_component_header">
+						<div class="rounded-t-md text-white py-2 uppercase text-center" id="tl_component_status_bar">
 						</div>
-						<div class="bg-gray d-flex flex-wrap align-items-center p-4">
+						<div class="bg-gray-100 flex flex-wrap items-center p-4">
 							<div class="box-icon-wrapper" id="tl_component_logo">
 								<img src="https://holores.s3.nl-ams.scw.cloud/translator.png" class="pr-3" width="45">
 							</div>
-							<div class="flex-one ">
-								<div class="inner-list-large-txt pb-1">
+							<div class="flex flex-col">
+								<div class="text-3xl pb-1">
 									TL Team
 								</div>
-								<div class="grey-box-sub-txt">
+								<div class="text-gray-600 text-sm">
 									Issues with services used by the TL Team.
 								</div>
 							</div>
@@ -611,21 +589,21 @@
 			<!-- Disabled as there are currently no public services -->
 			<!--
 			<br/>
-			<div class="row">
-				<div class="col-md-6 col-12">
-					<div class="box-wrapper" id="p_component_header">
-						<div class="round-small-heading color-white-own py-2 text-uppercase text-center"
+			<div class="flex">
+				<div class="flex justify-center ml-4">
+					<div class="box-wrapper min-w-[32rem]" id="p_component_header">
+						<div class="rounded-t-md text-white py-2 uppercase text-center"
 							id="p_component_status_bar">
 						</div>
-						<div class="bg-gray d-flex flex-wrap align-items-center p-4">
+						<div class="bg-gray-100 flex flex-wrap items-center p-4">
 							<div class="box-icon-wrapper" id="p_component_logo">
 								<img src="https://holores.s3.nl-ams.scw.cloud/external-blue.png" class="pr-3" width="45">
 							</div>
-							<div class="flex-one ">
-								<div class="inner-list-large-txt pb-1">
+							<div class="flex flex-col">
+								<div class="text-3xl pb-1">
 									Public
 								</div>
-								<div class="grey-box-sub-txt">
+								<div class="text-gray-600 text-sm">
 									Issues with public services hosted by HoloRes.
 								</div>
 							</div>
@@ -637,17 +615,17 @@
 				</div>
 			</div>
 			-->
-			<div class="bg-gray py-5 mt-5 main-page cross-bg" id="all_scheduled">
-				<div class="container">
+			<div class="bg-gray-100 py-5 mt-5 main-page cross-bg w-screen -mx-96" id="all_scheduled">
+				<div class="container mx-96">
 
-					<div class="row position-relative">
+					<div class="row relative">
 						<div class="right-turn-text">MAINTENANCE UPDATE NOTIFICATIONS</div>
 						<div class="col-lg-9 col-md-10 col-12" id="scheduled_maintenances_div">
-							<div class="status-txt-line">UPCOMING MAINTENANCE</div>
-							<div class="big-txt-info-second">
+							<div class="text-xl text-gray-400">UPCOMING MAINTENANCE</div>
+							<div class="text-3xl">
 								<div>Keep up to date with planned maintenance for our services.</div>
 							</div>
-							<div class="other-info-txt pb-4">
+							<div class="text-2xl pb-4">
 								Subscribe for updates so you’ll know ahead of time about potential service disruptions.
 							</div>
 
@@ -656,10 +634,10 @@
 				</div>
 			</div>
 			<div class="container pt-5 main-page">
-				<div class="row py-4">
-					<div class="col-12">
-						<div class="status-txt-line text-center">SYSTEM METRICS</div>
-						<div class="big-txt-info-second text-center">
+				<div class="flex py-4 content-center">
+					<div class="flex flex-col items-center w-full">
+						<div class="text-xl text-gray-400 text-center">SYSTEM METRICS</div>
+						<div class="text-2xl text-center">
 							<div>
 								Stay up to date with our uptime and response times.
 							</div>
