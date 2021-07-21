@@ -3,7 +3,7 @@
     "autoprefixer": "^10.2.5",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
-    "tailwindcss": "^2.1.2"
+    "tailwindcss": "^2.0.4"
   },
   "scripts": {
     "dev": "NODE_ENV=development postcss style.css -o ./dist/tailwind.css -w",

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="./dist/tailwind.css" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/luxon@1.23.0/build/global/luxon.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
@@ -172,7 +170,7 @@
 
 					$("#i_component_status_bar").html('All Systems Operational');
 				} else if (down_internal === 0 && down_services > 0) {
-					i_components_bg_class = "green";
+					i_components_bg_class = "green";md
 					reporting_text = down_services + ' SERVICE' + (down_services === 1 ? '' : 'S');
 
 					$("#i_component_status_bar").html(reporting_text + ' MAY BE IMPACTED');
@@ -227,7 +225,7 @@
 								let affected_component;
 								let affected_class;
 								if (i_value.id === incident_id) {
-									$(".components-affected").html('<div class="components-affected-wrapper"><span \ class="color-light-grey text-xl">This incident affected: </span></div>');
+									$(".components-affected").html('<div class="components-affected-wrapper"><span \ class="color-gray-300 text-xl">This incident affected: </span></div>');
 									if (i_value.impact === "none" && i_value.status === "investigating") {
 										i_value.components.forEach((component) => {
 											$(".components-affected-wrapper").append('<span>' + component.name + '</span>');
@@ -247,7 +245,7 @@
 														affected_class = "green-dot-own";
 													}
 													comp_name = ac_value.name.substring(ac_value.name.indexOf("-") + 1);
-													$(".components-affected-wrapper").append('<span class="' + affected_class + ' dot-before font-lg color-blue">' + comp_name + '</span>');
+													$(".components-affected-wrapper").append('<span class="' + affected_class + ' dot-before text-lg text-blue-500">' + comp_name + '</span>');
 													componentsArray.push(ac_value.name);
 													affected_component = ac_value.name;
 												}
@@ -293,10 +291,10 @@
 
 						incidentHtml = '<div class="col-md-12 class-to-catch"> \
               <div class="box-wrapper"> \
-                <div class="box-heading ' + incident_header_bg_class + ' color-white-own py-3 px-4"> \
-                  <div class="d-flex flex-wrap align-items-center"> \
-                    <div class="flex-one"><a class="color-white-own" href="/incidents/' + value.id + '">' + value.name + '</a></div> \
-                  <div class="small-btn-wrapper" id="services_' + value.id + '"> \
+                <div class="box-heading ' + incident_header_bg_class + ' text-white py-3 px-4"> \
+                  <div class="flex flex-wrap justify-between items-center"> \
+                    <div class="flex flex-col"><a class="text-white" href="/incidents/' + value.id + '">' + value.name + '</a></div> \
+                  <div class="small-btn-wrapper flex space-x-2" id="services_' + value.id + '"> \
                   </div> \
                 </div> \
               </div> \
@@ -333,7 +331,7 @@
 						if (value.incident_updates[0] && value.incident_updates[0].affected_components) {
 							$.each(value.incident_updates[0].affected_components, function (iuac_index, iuac_value) {
 								let affected_service = iuac_value.name.substring(iuac_value.name.indexOf("-") + 1);
-								incidentUpdate_ac = '<div class="btn btn-transparent text-uppercase">' + affected_service + '</div>';
+								incidentUpdate_ac = '<div class="rounded-sm bg-opacity-20 bg-white w-auto py-1 px-2 uppercase text-xs">' + affected_service + '</div>';
 								$('#services_' + value.id).append(incidentUpdate_ac);
 							});
 						}
@@ -478,13 +476,13 @@
 		<div class="loader"></div>
 	</div>
 	<header class="w-full">
-		<div class="flex justify-between items-center h-24 mx-4">
+		<div class="flex flex-wrap justify-center md:justify-between items-center h-56 md:h-24 mx-4">
 			<div>
 				<a href="/">
 					<img src="https://holores.s3.nl-ams.scw.cloud/banner_black.png" class="object-contain h-24">
 				</a>
 			</div>
-			<div class="flex text-lg justitfy-between w-fill -ml-24">
+			<div class="flex justitfy-between w-fill lg:text-lg md:-ml-24">
 				<a href="/history" class="mr-4">Past Incidents</a>
 				<a target="_blank" href="https://holores.atlassian.net" class="ml-4">Issue Tracker</a>
 			</div>
@@ -495,8 +493,8 @@
 			</div>
 		</div>
 		<div class="h-12 bg-gray-200">
-			<div class="flex items-center justify-between mx-4 h-full">
-				<div>
+			<div class="flex flex-wrap items-center justify-between mx-4 h-full text-xs md:text-base">
+				<div class="invisible md:visible">
 				</div>
 				<div class="text-center" id="page_status_bar">
 				</div>
@@ -505,15 +503,15 @@
 			</div>
 		</div>
 	</header>
-	<div class="mx-96">
+	<div class="mx-2 xl:mx-96">
 		<div class="pt-3" id="theStatus">
 			<div class="flex py-4">
 				<div>
-					<div class="status-txt-line">HoloRes' Status Page</div>
-					<div class="big-txt-info" id="status_based_txt"></div>
-					<div class="other-info-txt">Check here for updates about HoloRes' services availability.<br>
+					<div class="text-gray-400 text-lg">HoloRes' Status Page</div>
+					<div class="text-4xl" id="status_based_txt"></div>
+					<div class="text-gray-500 text-xl">Check here for updates about HoloRes' services availability.<br>
 						Subscribe
-						to
+						to					  
 						get real-time updates via email, RSS,
 						Slack, and more.
 					</div>
@@ -539,10 +537,10 @@
 			</div>
 		</div>
 		<div class="container pb-5 main-page position-relative z-index-own">
-			<div class="flex">
+			<div class="flex flex-wrap justify-center -ml-8 -mt-4">
 				<div class="divider-own flex" id="component_top_hr"></div>
-				<div class="flex justify-center -ml-4">
-					<div class="box-wrapper min-w-[32rem]" id="i_component_header">
+				<div class="flex justify-center ml-4 mt-4">
+					<div class="box-wrapper min-w-full md:min-w-[96rem] xl:min-w-[32rem]" id="i_component_header">
 						<div class="rounded-t-md text-white py-2 uppercase text-center" id="i_component_status_bar">
 						</div>
 						<div class="bg-gray-100 flex flex-wrap items-center p-4">
@@ -563,8 +561,8 @@
 						</ul>
 					</div>
 				</div>
-				<div class="flex justify-center ml-4">
-					<div class="box-wrapper min-w-[32rem]" id="tl_component_header">
+				<div class="flex justify-center ml-4 mt-4">
+					<div class="box-wrapper min-w-full md:min-w-[32rem]" id="tl_component_header">
 						<div class="rounded-t-md text-white py-2 uppercase text-center" id="tl_component_status_bar">
 						</div>
 						<div class="bg-gray-100 flex flex-wrap items-center p-4">
@@ -589,7 +587,7 @@
 			<!-- Disabled as there are currently no public services -->
 			<!--
 			<br/>
-			<div class="flex">
+			<div class="flex flex-wrap">
 				<div class="flex justify-center ml-4">
 					<div class="box-wrapper min-w-[32rem]" id="p_component_header">
 						<div class="rounded-t-md text-white py-2 uppercase text-center"
@@ -615,8 +613,8 @@
 				</div>
 			</div>
 			-->
-			<div class="bg-gray-100 py-5 mt-5 main-page cross-bg w-screen -mx-96" id="all_scheduled">
-				<div class="container mx-96">
+			<div class="bg-gray-100 py-5 mt-5 main-page cross-bg w-full mx-4 md:-mx-96" id="all_scheduled">
+				<div class="container mx-4 md:mx-96">
 
 					<div class="row relative">
 						<div class="right-turn-text">MAINTENANCE UPDATE NOTIFICATIONS</div>
