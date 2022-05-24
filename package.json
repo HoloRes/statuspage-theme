@@ -1,12 +1,30 @@
 {
+  "name": "statuspage-theme",
+  "private": true,
+  "version": "0.0.0",
   "dependencies": {
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.3.0",
+    "daisyui": "^2.15.1",
     "postcss-cli": "^8.3.1",
-    "tailwindcss": "^2.0.4"
+    "prettier": "^2.6.2",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9"
   },
   "scripts": {
-    "dev": "NODE_ENV=development postcss style.css -o ./dist/tailwind.css -w",
-    "build": "NODE_ENV=production postcss style.css -o ./dist/tailwind.css"
+    "css:dev": "NODE_ENV=development postcss src/styles.css -o ./dist/tailwind.css -w",
+    "css:build": "NODE_ENV=production postcss src/styles.css -o ./dist/tailwind.css",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24"
   }
 }
